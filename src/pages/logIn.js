@@ -7,6 +7,7 @@ const LogInPage = () => {
   const submitForm = useCallback(() => {
     setIsSubmitted(true);
   }, [setIsSubmitted]);
+
   return (
     <div>
       Hello LogInPage!
