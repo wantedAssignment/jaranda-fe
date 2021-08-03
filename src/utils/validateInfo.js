@@ -1,4 +1,4 @@
-export default function validateInfo(values) {
+const validateInfo = values => {
   let errors = {};
 
   if (!values.id) {
@@ -21,4 +21,6 @@ export default function validateInfo(values) {
   //   errors.password2 = 'Passwords do not match';
   // }
   return errors;
-}
+};
+
+export default validateInfo;
