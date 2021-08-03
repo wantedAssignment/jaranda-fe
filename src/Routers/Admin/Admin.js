@@ -53,7 +53,7 @@ const Admin = (props) => {
                   {v.card.number} / {v.card.company}
                 </th>
                 <th>
-                  <button onClick={handleUserDelete}>Del</button>
+                  <button onClick={handleUserDelete}>삭제</button>
                 </th>
               </tr>
             );
