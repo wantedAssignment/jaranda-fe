@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { UserStorage } from '../../utils/userStorage';
 import Modal from '../../Components/Modal';
-import { Table, AdminDiv } from './Admin.styles.js';
+import { Table, AdminDiv, Button, Title } from './Admin.styles.js';
 import SearchBar from './SearchBar';
 
 const Admin = props => {
@@ -12,6 +12,7 @@ const Admin = props => {
   const [updateData, setUpdateData] = useState(null);
   const [store, setStore] = useState(null);
   const [searchOption, setSearchOption] = useState({ username: '' });
+  const category = ['아이디', '이름', '주소', '나이', '권한', '카드'];
 
   useEffect(() => {
     localStorage.setItem('userData', JSON.stringify(FAKEDATE));
@@ -23,7 +24,7 @@ const Admin = props => {
     setTableData(() => getLocalStorage);
     setColumns(() => head);
   }, []);
-
+  console.log(columns);
   const handleUserDelete = id => e => {
     const newData = tableData.filter(user => user.id !== id);
     store.replaceAll(newData);
@@ -47,36 +48,45 @@ const Admin = props => {
 
   return (
     <AdminDiv>
-      <SearchBar setSearchOption={setSearchOption} />
-      <Table>
-        <thead>
-          <tr>
-            {columns.map(v => {
-              return <th key={v}>{v}</th>;
+      <div className="admin-div">
+        <Title>유저 정보 조회</Title>
+        <SearchBar className="admin-serarch" setSearchOption={setSearchOption} />
+        <Table>
+          <thead>
+            <tr>
+              {category.map(v => {
+                return <th key={v}>{v}</th>;
+              })}
+              <th>&#10006;</th>
+            </tr>
+          </thead>
+          <tbody>
+            {applySearchOptions(tableData).map(v => {
+              return (
+                <tr key={v.id}>
+                  <th>{v.id}</th>
+                  <th>{v.name}</th>
+                  <th>{v.address}</th>
+                  <th>{v.role}</th>
+                  <th>{v.age}</th>
+                  <th>
+                    {v.card.number} / {v.card.company}
+                  </th>
+                  <th>
+                    <Button onClick={handleUserUpdate(v.id)} style={{ marginRight: '15px' }}>
+                      수정
+                    </Button>
+                    <Button gray onClick={handleUserDelete(v.id)}>
+                      삭제
+                    </Button>
+                  </th>
+                </tr>
+              );
             })}
-            <th>&#10006;</th>
-          </tr>
-        </thead>
-        <tbody>
-          {applySearchOptions(tableData).map(v => {
-            return (
-              <tr key={v.id}>
-                <th onDoubleClick={handleUserUpdate(v.id)}>{v.id}</th>
-                <th onDoubleClick={handleUserUpdate(v.id)}>{v.name}</th>
-                <th onDoubleClick={handleUserUpdate(v.id)}>{v.address}</th>
-                <th onDoubleClick={handleUserUpdate(v.id)}>{v.role}</th>
-                <th onDoubleClick={handleUserUpdate(v.id)}>{v.age}</th>
-                <th onDoubleClick={handleUserUpdate(v.id)}>
-                  {v.card.number} / {v.card.company}
-                </th>
-                <th>
-                  <button onClick={handleUserDelete(v.id)}>삭제</button>
-                </th>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+          </tbody>
+        </Table>
+      </div>
+
       {updateModal && (
         <Modal
           store={store}

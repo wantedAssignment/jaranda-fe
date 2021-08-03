@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useRef } from 'react';
 import styled from 'styled-components';
+import { Button, Title } from '../pages/admin/Admin.styles';
 
 const Modal = ({ store, tableData, setTableData, updateData, setUpdateModal }) => {
   //   const [id, setId] = useState(null);
@@ -45,33 +46,36 @@ const Modal = ({ store, tableData, setTableData, updateData, setUpdateModal }) =
     return (
       <Container>
         <Form ref={formRef}>
+          <Title style={{ margin: '30px 0px' }}>유저 정보 관리</Title>{' '}
           <InputGroup>
-            <label>Name</label>
+            <label>이름</label>
             <input type="text" defaultValue={updateData.name} />
           </InputGroup>
           <InputGroup>
-            <label>Address</label>
+            <label>주소</label>
             <input type="text" defaultValue={updateData.address} />
           </InputGroup>
           <InputGroup>
-            <label>Role</label>
+            <label>권한</label>
             <input type="text" defaultValue={updateData.role} />
           </InputGroup>
           <InputGroup>
-            <label>Age</label>
+            <label>나이</label>
             <input type="text" defaultValue={updateData.age} />
           </InputGroup>
           <InputGroup>
-            <label>Card Number</label>
+            <label>카드번호</label>
             <input type="text" defaultValue={updateData.card.number} />
           </InputGroup>
           <InputGroup>
-            <label>Card Company</label>
+            <label>카드회사</label>
             <input type="text" defaultValue={updateData.card.company} />
           </InputGroup>
           <BtnGroup>
-            <div onClick={handleClickSave}>저장</div>
-            <div onClick={handleClickClose}>닫기</div>
+            <Button gray onClick={handleClickSave}>
+              취소
+            </Button>
+            <Button onClick={handleClickClose}>저장</Button>
           </BtnGroup>
         </Form>
       </Container>
@@ -91,21 +95,40 @@ const Container = styled.div`
   top: 0;
   width: 100vw;
   height: 100vh;
-  background-color: lightblue;
-  opacity: 0.7;
+  background-color: #c9c9c9;
 `;
 
 const Form = styled.div`
-  display: flex;
-  flex-direction: column;
+  text-align: center;
+  background-color: #fff;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 65%;
+  border-radius: 10px;
 `;
 
 const InputGroup = styled.div`
-  width: 300px;
+  text-align: right;
+  padding: 5px 40px;
+  label {
+    font-weight: bold;
+    margin: 20px;
+  }
+  input {
+    padding: 15px 10px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    margin: 5px 20px;
+  }
 `;
 
 const BtnGroup = styled.div`
   display: flex;
-  justify-content: space-around;
-  width: 200px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  Button {
+    margin: 15px 20px;
+  }
 `;
