@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import SignUpContainer from './SignUpContainer';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SignUpContainer />
   </React.StrictMode>,
   document.getElementById('root'),
 );
