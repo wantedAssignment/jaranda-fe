@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { UserStorage } from '../../utils/userStorage';
 import Modal from '../../Components/Modal';
 import { Table, AdminDiv } from './Admin.styles.js';
+import SearchBar from './SearchBar';
 
 const Admin = props => {
   const [tableData, setTableData] = useState([]);
@@ -10,6 +11,7 @@ const Admin = props => {
   const [updateModal, setUpdateModal] = useState(false);
   const [updateData, setUpdateData] = useState(null);
   const [store, setStore] = useState(null);
+  const [searchOption, setSearchOption] = useState({ username: '' });
 
   useEffect(() => {
     localStorage.setItem('userData', JSON.stringify(FAKEDATE));
@@ -37,8 +39,15 @@ const Admin = props => {
     [tableData],
   );
 
+  const applySearchOptions = tableData => {
+    const key = Object.keys(searchOption)[0];
+    const value = searchOption[key];
+    return tableData.filter(user => (value ? user[key]?.includes(value) : true));
+  };
+
   return (
     <AdminDiv>
+      <SearchBar setSearchOption={setSearchOption} />
       <Table>
         <thead>
           <tr>
@@ -49,7 +58,7 @@ const Admin = props => {
           </tr>
         </thead>
         <tbody>
-          {tableData.map(v => {
+          {applySearchOptions(tableData).map(v => {
             return (
               <tr key={v.id}>
                 <th onDoubleClick={handleUserUpdate(v.id)}>{v.id}</th>
