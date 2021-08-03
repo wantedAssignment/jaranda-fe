@@ -1,13 +1,7 @@
-import Router from './Components/Router';
-import GlobalStyles from './Components/GlobalStyles';
+import Router from './routes';
 
-function App() {
-  return (
-    <>
-      <GlobalStyles />
-      <Router />
-    </>
-  );
-}
+const App = () => {
+  return <Router />;
+};
 
 export default App;
