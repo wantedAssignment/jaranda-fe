@@ -21,6 +21,12 @@ export class UserStorage {
     return result;
   }
 
+  // localStorage 데이터 교체
+  replaceAll(arr) {
+    localStorage.removeItem(this.name);
+    localStorage.setItem(this.name, JSON.stringify(arr));
+  }
+
   _getDataFromStorage() {
     return JSON.parse(localStorage.getItem(this.name));
   }
@@ -39,7 +45,7 @@ export class UserStorage {
   _changeToArray(obj) {
     const arr = Object.keys(obj).map(key => {
       const item = {
-        id: key,
+        id: obj[key].id,
         name: obj[key].name,
         address: obj[key].address,
         role: obj[key].role,
