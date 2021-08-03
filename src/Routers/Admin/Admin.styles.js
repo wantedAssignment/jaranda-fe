@@ -33,6 +33,8 @@ export const Table = styled.table`
 
   tbody {
     tr {
+      transition: border-size 0.3s ease-in-ease-out;
+      border-color: #aac14f;
       :hover {
         cursor: pointer;
         border: 1px solid #aac14f;
@@ -51,9 +53,9 @@ export const Table = styled.table`
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
       0 2px 4px -1px rgba(0, 0, 0, 0.06);
     cursor: pointer;
+    transition: all 0.3s ease-in-out;
     :hover {
       background-color: #aac14f;
     }
   }
 `;
-  
