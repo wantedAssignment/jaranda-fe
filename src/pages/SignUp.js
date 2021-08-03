@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 
-import useInput from './hook/useInput';
+import useInput from '../hook/useInput';
+import DaumPostcode from 'react-daum-postcode';
 
 const SignUp = () => {
   const [userId, setUserId] = useState('');
@@ -11,6 +12,10 @@ const SignUp = () => {
   const [mismatchError, setMismatchError] = useState(false);
   const [idValidationError, setIdValidationError] = useState(false);
   const [pwdValidationError, setPwdValidationError] = useState(false);
+
+  const [isOpenAddress, setIsOpenAddress] = useState(false);
+  const [address, setAddress] = useState(''); // 주소
+  const [addressDetail, setAddressDetail] = useState(''); // 상세주소
 
   const onChangeUserId = e => {
     const regex = /[a-zA-Z]/;
@@ -30,6 +35,25 @@ const SignUp = () => {
     setPasswordCheck(e.target.value);
     setMismatchError(e.target.value !== password);
     setPwdValidationError(e.target.value.length < 6 || e.target.value.length > 12);
+  };
+
+  const onCompletePost = data => {
+    let fullAddr = data.address;
+    let extraAddr = '';
+
+    if (data.addressType === 'R') {
+      if (data.bname !== '') {
+        extraAddr += data.bname;
+      }
+      if (data.buildingName !== '') {
+        extraAddr += extraAddr !== '' ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddr += extraAddr !== '' ? ` (${extraAddr})` : '';
+    }
+
+    setAddress(data.zonecode);
+    setAddressDetail(fullAddr);
+    setIsOpenAddress(false);
   };
 
   return (
@@ -74,7 +98,7 @@ const SignUp = () => {
         <label>
           <span>주소</span>
           <div>
-            <input type="text" />
+            <input type="text" onClick={() => setIsOpenAddress(true)} />
           </div>
         </label>
         <label>
@@ -88,6 +112,7 @@ const SignUp = () => {
             <input type="text" required maxLength="4" />
           </div>
         </label>
+        {isOpenAddress && <DaumPostcode autoClose onComplete={onCompletePost} />}
         {mismatchError && <h2>비밀번호가 일치하지 않습니다.</h2>}
         {pwdValidationError && <h2>비밀번호는 6자리 이상 12자리 이하이여야 합니다.</h2>}
         {idValidationError && <h2>id는 6자리 이상 12자리 이하 영어만 가능합니다.</h2>}

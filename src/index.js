@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import SignUpContainer from './SignUpContainer';
+import SignUpContainer from './pages/SignUpContainer';
 
 ReactDOM.render(
   <React.StrictMode>
