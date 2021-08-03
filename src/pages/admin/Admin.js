@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from 'react';
+import { UserStorage } from '../../utils/userStorage';
 import Modal from '../../Components/Modal';
 import { Table, AdminDiv } from './Admin.styles.js';
 
@@ -8,19 +9,23 @@ const Admin = props => {
   const [columns, setColumns] = useState([]);
   const [updateModal, setUpdateModal] = useState(false);
   const [updateData, setUpdateData] = useState(null);
+  const [store, setStore] = useState(null);
 
   useEffect(() => {
     localStorage.setItem('userData', JSON.stringify(FAKEDATE));
-    const getLocalStorage = JSON.parse(localStorage.getItem('userData'));
-    setTableData(() => getLocalStorage);
+    const storage = new UserStorage('userData');
+    setStore(() => storage);
 
+    const getLocalStorage = storage.getAll();
     const head = getLocalStorage[0] ? Object.keys(getLocalStorage[0]) : [];
-    setColumns(head);
+    setTableData(() => getLocalStorage);
+    setColumns(() => head);
   }, []);
 
   const handleUserDelete = id => e => {
-    console.log(id);
-    return setTableData(tableData.filter(user => user.id !== id));
+    const newData = tableData.filter(user => user.id !== id);
+    store.replaceAll(newData);
+    return setTableData(newData);
   };
 
   const handleUserUpdate = useCallback(
@@ -65,6 +70,7 @@ const Admin = props => {
       </Table>
       {updateModal && (
         <Modal
+          store={store}
           tableData={tableData}
           setTableData={setTableData}
           updateData={updateData}
@@ -79,7 +85,7 @@ export default Admin;
 
 const FAKEDATE = [
   {
-    id: '1',
+    id: 'a',
     name: 'abab',
     address: 'busan',
     role: 'admin',
@@ -90,7 +96,7 @@ const FAKEDATE = [
     },
   },
   {
-    id: '2',
+    id: 'b',
     name: 'dede',
     address: 'busan',
     role: 'admin',
@@ -101,7 +107,7 @@ const FAKEDATE = [
     },
   },
   {
-    id: '3',
+    id: 'c',
     name: 'ffff',
     address: 'busan',
     role: 'admin',
@@ -112,7 +118,7 @@ const FAKEDATE = [
     },
   },
   {
-    id: '4',
+    id: 'd',
     name: 'qqq',
     address: 'busan',
     role: 'admin',
@@ -123,7 +129,7 @@ const FAKEDATE = [
     },
   },
   {
-    id: '5',
+    id: 'e',
     name: 'ghhhhh',
     address: 'yongin',
     role: 'admin',

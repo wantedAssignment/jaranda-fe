@@ -2,7 +2,7 @@
 import React, { useCallback, useRef } from 'react';
 import styled from 'styled-components';
 
-const Modal = ({ tableData, setTableData, updateData, setUpdateModal }) => {
+const Modal = ({ store, tableData, setTableData, updateData, setUpdateModal }) => {
   //   const [id, setId] = useState(null);
   //   const [name, setName] = useState(null);
   //   const [address, setAddress] = useState(null);
@@ -33,6 +33,7 @@ const Modal = ({ tableData, setTableData, updateData, setUpdateModal }) => {
       }
     });
 
+    store.replaceAll(newTableData);
     setTableData(() => newTableData);
   }, []);
 
