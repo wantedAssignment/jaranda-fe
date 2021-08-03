@@ -12,8 +12,8 @@ const Modal = ({ tableData, setTableData, updateData, setUpdateModal }) => {
   const formRef = useRef(null);
 
   const handleClickSave = useCallback(() => {
-    const valueArray = Array.from(formRef.current.children, (a) => a);
-    const newTableData = [...tableData].map((v) => {
+    const valueArray = Array.from(formRef.current.children, a => a);
+    const newTableData = [...tableData].map(v => {
       if (v.id === updateData.id) {
         const cardData = {
           number: valueArray[4].children[1].value,

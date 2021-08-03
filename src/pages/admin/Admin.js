@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import Modal from '../../Components/Modal';
 import { Table, AdminDiv } from './Admin.styles.js';
 
-const Admin = (props) => {
+const Admin = props => {
   const [tableData, setTableData] = useState([]);
   const [columns, setColumns] = useState([]);
   const [updateModal, setUpdateModal] = useState(false);
@@ -18,18 +18,18 @@ const Admin = (props) => {
     setColumns(head);
   }, []);
 
-  const handleUserDelete = (id) => (e) => {
+  const handleUserDelete = id => e => {
     console.log(id);
-    return setTableData(tableData.filter((user) => user.id !== id));
+    return setTableData(tableData.filter(user => user.id !== id));
   };
 
   const handleUserUpdate = useCallback(
-    (id) => (e) => {
-      const findData = tableData.find((v) => v.id === id);
+    id => e => {
+      const findData = tableData.find(v => v.id === id);
       setUpdateModal(true);
       setUpdateData(findData);
     },
-    [tableData]
+    [tableData],
   );
 
   return (
@@ -37,14 +37,14 @@ const Admin = (props) => {
       <Table>
         <thead>
           <tr>
-            {columns.map((v) => {
+            {columns.map(v => {
               return <th key={v}>{v}</th>;
             })}
-            <th></th>
+            <th>&#10006;</th>
           </tr>
         </thead>
         <tbody>
-          {tableData.map((v) => {
+          {tableData.map(v => {
             return (
               <tr key={v.id}>
                 <th onDoubleClick={handleUserUpdate(v.id)}>{v.id}</th>
