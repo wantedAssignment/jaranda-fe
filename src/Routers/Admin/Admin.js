@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useEffect, useState } from "react";
-import Modal from "../../Components/Modal";
+import React, { useCallback, useEffect, useState } from 'react';
+import Modal from '../../Components/Modal';
+import { Table, AdminDiv } from './Admin.styles.js';
 
 const Admin = (props) => {
   const [tableData, setTableData] = useState([]);
@@ -31,13 +32,14 @@ const Admin = (props) => {
   );
 
   return (
-    <>
-      <table>
+    <AdminDiv>
+      <Table>
         <thead>
           <tr>
             {columns.map((v) => {
               return <th key={v}>{v}</th>;
             })}
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -51,6 +53,9 @@ const Admin = (props) => {
                 <th>{v.age}</th>
                 <th>
                   {v.card.number} / {v.card.company}
+                </th>
+                <th>
+                  <button onClick={handleUserDelete}>삭제</button>
                 </th>
               </tr>
             );
@@ -70,7 +75,7 @@ const Admin = (props) => {
           setUpdateModal={setUpdateModal}
         />
       )}
-    </>
+    </AdminDiv>
   );
 };
 
