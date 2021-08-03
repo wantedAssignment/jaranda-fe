@@ -31,13 +31,13 @@ export class UserStorage {
 
   _checkExistId(newId) {
     const arr = this.getAll();
-    const isExist = arr.some((item) => item.id === newId);
+    const isExist = arr.some(item => item.id === newId);
 
     return isExist;
   }
 
   _changeToArray(obj) {
-    const arr = Object.keys(obj).map((key) => {
+    const arr = Object.keys(obj).map(key => {
       const item = {
         id: key,
         name: obj[key].name,
@@ -54,7 +54,7 @@ export class UserStorage {
 
   _changeToObject(arr) {
     let result = {};
-    arr.forEach((item) => {
+    arr.forEach(item => {
       result[item.id] = {
         name: item.name,
         address: item.address,
