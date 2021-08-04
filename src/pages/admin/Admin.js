@@ -44,7 +44,7 @@ const Admin = () => {
     setStore(() => storage);
     setTableData(() => getLocalStorage);
   }, []);
-  console.log(columns);
+
   const handleUserDelete = id => e => {
     const newData = tableData.filter(user => user.id !== id);
     store.replaceAll(newData);
