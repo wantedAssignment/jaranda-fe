@@ -4,6 +4,7 @@ import { UserStorage } from '../../utils/userStorage';
 import Modal from '../../Components/Modal';
 import { Table, AdminDiv } from './Admin.styles.js';
 import SearchBar from './SearchBar';
+import Pagination from '../../containers/pagination';
 
 const Admin = props => {
   const [tableData, setTableData] = useState([]);
@@ -77,6 +78,7 @@ const Admin = props => {
           })}
         </tbody>
       </Table>
+      <Pagination arr={new Array(333).fill(1)} />
       {updateModal && (
         <Modal
           store={store}

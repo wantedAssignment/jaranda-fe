@@ -1,14 +1,6 @@
-const PaginationUI = ({ pages, runOnClick, onClickLeft, onClickRight, onChange }) => {
+const PaginationUI = ({ pages, onClickLeft, onClickRight, runOnClick }) => {
   return (
     <div style={{ display: 'flex', width: 500 }}>
-      <label htmlFor="pageSelect" style={{ marginRight: 8 }}>
-        page
-      </label>
-      <select onChange={onChange} name="pageUnit" id="pageSelect" style={{ marginRight: 10 }}>
-        <option>1</option>
-        <option>3</option>
-        <option>5</option>
-      </select>
       <div style={{ width: 400, display: 'flex', justifyContent: 'space-between' }}>
         <img
           src="./img/arrowLeft.png"
