@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import PaginationUI from '../../presentationals/pagination';
+import PaginationUI from './presenter';
 
 /**
  * Desc
@@ -29,7 +29,7 @@ const Pagination = ({ arr, onClick }) => {
     } else {
       setPages(new Array(10).fill(0).map((_, i) => i + 1));
     }
-  }, []);
+  }, [MAX_LENGTH, SET]);
 
   const onClickLeft = () => {
     if (count === 0) return;
