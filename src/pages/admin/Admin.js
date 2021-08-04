@@ -5,7 +5,7 @@ import Passport from '../../utils/passport';
 import { UserStorage } from '../../utils/userStorage';
 import Modal from '../../Components/Modal';
 import { Table, AdminDiv } from './Admin.styles.js';
-import SearchBar from './SearchBar';
+import SearchBar from '../../Components/admin/SearchBar';
 import Pagination from '../../Components/pagination';
 
 const Admin = () => {
