@@ -1,31 +1,27 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const Modal = ({ store, tableData, setTableData, updateData, setUpdateModal }) => {
-  //   const [id, setId] = useState(null);
-  //   const [name, setName] = useState(null);
-  //   const [address, setAddress] = useState(null);
-  //   const [role, setRole] = useState(null);
-  //   const [age, setAge] = useState(null);
-  //   const [card, setCard] = useState(null);
+  const [age, setAge] = useState(updateData.age);
   const formRef = useRef(null);
+
+  const handleOnChange = useCallback(e => {
+    setAge(() => e.target.value);
+  }, []);
 
   const handleClickSave = useCallback(() => {
     const valueArray = Array.from(formRef.current.children, a => a);
     const newTableData = [...tableData].map(v => {
       if (v.id === updateData.id) {
-        const cardData = {
-          number: valueArray[4].children[1].value,
-          company: valueArray[5].children[1].value,
-        };
         const newData = {
           id: updateData.id,
           name: valueArray[0].children[1].value,
-          address: valueArray[1].children[1].value,
-          role: valueArray[2].children[1].value,
-          age: valueArray[3].children[1].value,
-          card: cardData,
+          password: valueArray[1].children[1].value,
+          address: valueArray[2].children[1].value,
+          role: valueArray[3].children[1].value,
+          age: valueArray[4].children[1].value,
+          card: { ...v.card },
         };
         return newData;
       } else {
@@ -50,6 +46,10 @@ const Modal = ({ store, tableData, setTableData, updateData, setUpdateModal }) =
             <input type="text" defaultValue={updateData.name} />
           </InputGroup>
           <InputGroup>
+            <label>Password</label>
+            <input type="text" defaultValue={updateData.password} minLength={6} maxLength={12} />
+          </InputGroup>
+          <InputGroup>
             <label>Address</label>
             <input type="text" defaultValue={updateData.address} />
           </InputGroup>
@@ -59,15 +59,8 @@ const Modal = ({ store, tableData, setTableData, updateData, setUpdateModal }) =
           </InputGroup>
           <InputGroup>
             <label>Age</label>
-            <input type="text" defaultValue={updateData.age} />
-          </InputGroup>
-          <InputGroup>
-            <label>Card Number</label>
-            <input type="text" defaultValue={updateData.card.number} />
-          </InputGroup>
-          <InputGroup>
-            <label>Card Company</label>
-            <input type="text" defaultValue={updateData.card.company} />
+            <input type="range" defaultValue={updateData.age} onChange={handleOnChange} />
+            <span>{age}</span>
           </InputGroup>
           <BtnGroup>
             <div onClick={handleClickSave}>저장</div>
