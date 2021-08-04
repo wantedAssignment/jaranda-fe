@@ -1,3 +1,6 @@
+// const userData = new UserSotrage('userData'); -> 회원가입한 유저 데이터 사용
+// const currentUser = new UserStorage('currentUser'); -> 현재 유저 데이터 사용
+
 export class UserStorage {
   constructor(name) {
     this.name = name;
@@ -25,6 +28,22 @@ export class UserStorage {
   replaceAll(arr) {
     localStorage.removeItem(this.name);
     localStorage.setItem(this.name, JSON.stringify(arr));
+  }
+
+  getId() {
+    if (this.name !== 'currentUser') throw new Error(errorMessage(this.name));
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    return user.id || null;
+  }
+
+  login(user) {
+    if (this.name !== 'currentUser') throw new Error(errorMessage(this.name));
+    localStorage.setItem(this.name, JSON.stringify(user));
+  }
+
+  logout() {
+    if (this.name !== 'currentUser') throw new Error(errorMessage(this.name));
+    localStorage.removeItem('currentUser');
   }
 
   _getDataFromStorage() {
@@ -75,3 +94,7 @@ export class UserStorage {
     return result;
   }
 }
+
+const errorMessage = name => {
+  return `선언 이름을 확인해주세요. : ${name}`;
+};
