@@ -18,8 +18,6 @@ const Admin = () => {
   const [isRedirect, setIsRedirect] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('userData', JSON.stringify(FAKEDATE));
-    localStorage.setItem('currentUser', JSON.stringify(FAKEDATE2));
     const storage = new UserStorage('userData');
     const loginStorage = new UserStorage('currentUser');
     const check = Passport.checkAdmin(loginStorage.getUser());

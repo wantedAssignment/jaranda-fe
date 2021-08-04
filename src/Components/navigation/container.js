@@ -7,7 +7,7 @@ const Navigation = () => {
   const currentUser = useMemo(() => new UserStorage('currentUser'), []);
 
   useEffect(() => {
-    if (currentUser.getId()) {
+    if (currentUser?.getUser()?.id) {
       setIsLogin(true);
     } else {
       setIsLogin(false);
