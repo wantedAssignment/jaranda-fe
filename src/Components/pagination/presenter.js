@@ -4,6 +4,7 @@ const PaginationUI = ({ pages, onClickLeft, onClickRight, runOnClick }) => {
       <div style={{ width: 400, display: 'flex', justifyContent: 'space-between' }}>
         <img
           src="./img/arrowLeft.png"
+          alt="arrow"
           style={{ cursor: 'pointer', width: 10, height: 15 }}
           onClick={onClickLeft}
         />
@@ -14,6 +15,7 @@ const PaginationUI = ({ pages, onClickLeft, onClickRight, runOnClick }) => {
         ))}
         <img
           src="./img/arrowRight.png"
+          alt="arrow"
           style={{ cursor: 'pointer', width: 10, height: 15 }}
           onClick={onClickRight}
         />

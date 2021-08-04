@@ -1,26 +1,36 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import Passport from '../../utils/passport';
 import { UserStorage } from '../../utils/userStorage';
 import Modal from '../../Components/Modal';
 import { Table, AdminDiv } from './Admin.styles.js';
-import SearchBar from './SearchBar';
-import Pagination from '../../containers/pagination';
+import SearchBar from '../../Components/admin/SearchBar';
+import Pagination from '../../Components/pagination';
 
-const Admin = props => {
+const Admin = () => {
   const [tableData, setTableData] = useState([]);
   const [columns, setColumns] = useState([]);
   const [updateModal, setUpdateModal] = useState(false);
   const [updateData, setUpdateData] = useState(null);
   const [store, setStore] = useState(null);
   const [searchOption, setSearchOption] = useState({ username: '' });
+  const [isRedirect, setIsRedirect] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('userData', JSON.stringify(FAKEDATE));
     const storage = new UserStorage('userData');
-    setStore(() => storage);
-
+    const loginStorage = new UserStorage('currentUser');
+    const check = Passport.checkAdmin(loginStorage.getUser());
     const getLocalStorage = storage.getAll();
-    const head = getLocalStorage[0] ? Object.keys(getLocalStorage[0]) : [];
+    const head = getLocalStorage[0]
+      ? Object.keys(getLocalStorage[0]).filter(v => v !== 'card')
+      : [];
+
+    if (check) {
+      setIsRedirect(check);
+    }
+
+    setStore(() => storage);
     setTableData(() => getLocalStorage);
     setColumns(() => head);
   }, []);
@@ -46,15 +56,22 @@ const Admin = props => {
     return tableData.filter(user => (value ? user[key]?.includes(value) : true));
   };
 
+  if (isRedirect) {
+    return Passport.redirectHome();
+  }
+
   return (
     <AdminDiv>
       <SearchBar setSearchOption={setSearchOption} />
       <Table>
         <thead>
           <tr>
-            {columns.map(v => {
-              return <th key={v}>{v}</th>;
-            })}
+            <th>ID</th>
+            <th>Name</th>
+            <th>Password</th>
+            <th>Address</th>
+            <th>Role</th>
+            <th>Age</th>
             <th>&#10006;</th>
           </tr>
         </thead>
@@ -64,12 +81,10 @@ const Admin = props => {
               <tr key={v.id}>
                 <th onDoubleClick={handleUserUpdate(v.id)}>{v.id}</th>
                 <th onDoubleClick={handleUserUpdate(v.id)}>{v.name}</th>
+                <th onDoubleClick={handleUserUpdate(v.id)}>{v.password}</th>
                 <th onDoubleClick={handleUserUpdate(v.id)}>{v.address}</th>
                 <th onDoubleClick={handleUserUpdate(v.id)}>{v.role}</th>
                 <th onDoubleClick={handleUserUpdate(v.id)}>{v.age}</th>
-                <th onDoubleClick={handleUserUpdate(v.id)}>
-                  {v.card.number} / {v.card.company}
-                </th>
                 <th>
                   <button onClick={handleUserDelete(v.id)}>삭제</button>
                 </th>
@@ -78,7 +93,7 @@ const Admin = props => {
           })}
         </tbody>
       </Table>
-      <Pagination arr={new Array(333).fill(1)} />
+      <Pagination arr={tableData} />
       {updateModal && (
         <Modal
           store={store}
@@ -93,61 +108,3 @@ const Admin = props => {
 };
 
 export default Admin;
-
-const FAKEDATE = [
-  {
-    id: 'a',
-    name: 'abab',
-    address: 'busan',
-    role: 'admin',
-    age: 13,
-    card: {
-      number: 123,
-      company: 'sinhan',
-    },
-  },
-  {
-    id: 'b',
-    name: 'dede',
-    address: 'busan',
-    role: 'admin',
-    age: 15,
-    card: {
-      number: 124,
-      company: 'sinhaan',
-    },
-  },
-  {
-    id: 'c',
-    name: 'ffff',
-    address: 'busan',
-    role: 'admin',
-    age: 34,
-    card: {
-      number: 43423,
-      company: 'kb국민',
-    },
-  },
-  {
-    id: 'd',
-    name: 'qqq',
-    address: 'busan',
-    role: 'admin',
-    age: 43,
-    card: {
-      number: 121243,
-      company: 'sinhan',
-    },
-  },
-  {
-    id: 'e',
-    name: 'ghhhhh',
-    address: 'yongin',
-    role: 'admin',
-    age: 43,
-    card: {
-      number: 15223,
-      company: '하나은행',
-    },
-  },
-];
