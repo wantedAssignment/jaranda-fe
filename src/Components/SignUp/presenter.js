@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 
-import useInput from '../hook/useInput';
-import CardInput from '../utils/cardInput';
-import Modal from '../utils/modal';
+import useInput from '../../hook/useInput';
+import CardInput from '../../utils/cardInput';
+import Modal from '../../utils/modal';
+import { UserStorage } from '../../utils/userStorage';
+
 import DaumPostcode from 'react-daum-postcode';
 
 const SignUp = ({ onSubmitUserInfo }) => {
+  const userData = new UserStorage('userData');
+
   const [userId, setUserId] = useState('');
   const [userName, onChangeUserName] = useInput('');
   const [userAge, onChangeUserAge] = useInput(0);
@@ -23,12 +27,15 @@ const SignUp = ({ onSubmitUserInfo }) => {
   const [bankName, onChangeBankName, setBankName] = useInput('');
   const [account, , setAccount] = useInput('');
 
+  const [isOverLapIdError, setIsOverLapIdError] = useState(false);
+
   const onChangeUserId = e => {
     const regex = /[a-zA-Z]/;
     setUserId(e.target.value);
     setIdValidationError(
       e.target.value.length < 6 || e.target.value.length > 12 || !regex.test(e.target.value),
     );
+    setIsOverLapIdError(false);
   };
 
   const onChangePassword = e => {
@@ -67,6 +74,10 @@ const SignUp = ({ onSubmitUserInfo }) => {
 
   const onSubmitSignUp = e => {
     e.preventDefault();
+
+    const userList = userData.getAll();
+    setIsOverLapIdError(() => userList.some(user => user.id === userId));
+
     onSubmitUserInfo({
       id: userId,
       name: userName,
@@ -170,7 +181,8 @@ const SignUp = ({ onSubmitUserInfo }) => {
         {mismatchError && <h2>비밀번호가 일치하지 않습니다.</h2>}
         {pwdValidationError && <h2>비밀번호는 6자리 이상 12자리 이하이여야 합니다.</h2>}
         {idValidationError && <h2>id는 6자리 이상 12자리 이하 영어만 가능합니다.</h2>}
-        {mismatchError || pwdValidationError || idValidationError ? (
+        {isOverLapIdError && <h2>중복된 아이디입니다.</h2>}
+        {mismatchError || pwdValidationError || idValidationError || isOverLapIdError ? (
           <button disabled type="submit">
             회원가입
           </button>
