@@ -1,26 +1,38 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import Passport from '../../utils/passport';
 import { UserStorage } from '../../utils/userStorage';
 import Modal from '../../Components/Modal';
 import { Table, AdminDiv } from './Admin.styles.js';
 import SearchBar from './SearchBar';
 import Pagination from '../../containers/pagination';
 
-const Admin = props => {
+const Admin = () => {
   const [tableData, setTableData] = useState([]);
   const [columns, setColumns] = useState([]);
   const [updateModal, setUpdateModal] = useState(false);
   const [updateData, setUpdateData] = useState(null);
   const [store, setStore] = useState(null);
   const [searchOption, setSearchOption] = useState({ username: '' });
+  const [isRedirect, setIsRedirect] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('userData', JSON.stringify(FAKEDATE));
+    localStorage.setItem('currentUser', JSON.stringify(FAKEDATE2));
     const storage = new UserStorage('userData');
-    setStore(() => storage);
-
+    const loginStorage = new UserStorage('currentUser');
+    const check = Passport.checkAdmin(loginStorage.getUser());
     const getLocalStorage = storage.getAll();
-    const head = getLocalStorage[0] ? Object.keys(getLocalStorage[0]) : [];
+    const head = getLocalStorage[0]
+      ? Object.keys(getLocalStorage[0]).filter(v => v !== 'card')
+      : [];
+
+    if (check) {
+      setIsRedirect(check);
+    }
+
+    setStore(() => storage);
     setTableData(() => getLocalStorage);
     setColumns(() => head);
   }, []);
@@ -46,6 +58,13 @@ const Admin = props => {
     return tableData.filter(user => (value ? user[key]?.includes(value) : true));
   };
 
+  if (isRedirect) {
+    return Passport.redirectHome();
+  }
+
+  console.log(columns);
+  console.log(tableData);
+
   return (
     <AdminDiv>
       <SearchBar setSearchOption={setSearchOption} />
@@ -64,12 +83,10 @@ const Admin = props => {
               <tr key={v.id}>
                 <th onDoubleClick={handleUserUpdate(v.id)}>{v.id}</th>
                 <th onDoubleClick={handleUserUpdate(v.id)}>{v.name}</th>
+                <th onDoubleClick={handleUserUpdate(v.id)}>{v.password}</th>
                 <th onDoubleClick={handleUserUpdate(v.id)}>{v.address}</th>
                 <th onDoubleClick={handleUserUpdate(v.id)}>{v.role}</th>
                 <th onDoubleClick={handleUserUpdate(v.id)}>{v.age}</th>
-                <th onDoubleClick={handleUserUpdate(v.id)}>
-                  {v.card.number} / {v.card.company}
-                </th>
                 <th>
                   <button onClick={handleUserDelete(v.id)}>삭제</button>
                 </th>
@@ -98,6 +115,7 @@ const FAKEDATE = [
   {
     id: 'a',
     name: 'abab',
+    password: '123',
     address: 'busan',
     role: 'admin',
     age: 13,
@@ -109,6 +127,7 @@ const FAKEDATE = [
   {
     id: 'b',
     name: 'dede',
+    password: '123',
     address: 'busan',
     role: 'admin',
     age: 15,
@@ -120,6 +139,7 @@ const FAKEDATE = [
   {
     id: 'c',
     name: 'ffff',
+    password: '123',
     address: 'busan',
     role: 'admin',
     age: 34,
@@ -131,6 +151,7 @@ const FAKEDATE = [
   {
     id: 'd',
     name: 'qqq',
+    password: '123',
     address: 'busan',
     role: 'admin',
     age: 43,
@@ -142,6 +163,7 @@ const FAKEDATE = [
   {
     id: 'e',
     name: 'ghhhhh',
+    password: '123',
     address: 'yongin',
     role: 'admin',
     age: 43,
@@ -151,3 +173,16 @@ const FAKEDATE = [
     },
   },
 ];
+
+const FAKEDATE2 = {
+  id: 'a',
+  name: 'abab',
+  password: '123',
+  address: 'busan',
+  role: 'admin',
+  age: 13,
+  card: {
+    number: 123,
+    company: 'sinhan',
+  },
+};
