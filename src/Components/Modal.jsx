@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { Button, Title } from '../pages/admin/Admin.styles';
 
 const Modal = ({ store, tableData, setTableData, updateData, setUpdateModal }) => {
   const [age, setAge] = useState(updateData.age);
@@ -41,8 +42,9 @@ const Modal = ({ store, tableData, setTableData, updateData, setUpdateModal }) =
     return (
       <Container>
         <Form ref={formRef}>
+          <Title style={{ margin: '30px 0px' }}>유저 정보 관리</Title>{' '}
           <InputGroup>
-            <label>Name</label>
+            <label>이름</label>
             <input type="text" defaultValue={updateData.name} />
           </InputGroup>
           <InputGroup>
@@ -54,7 +56,7 @@ const Modal = ({ store, tableData, setTableData, updateData, setUpdateModal }) =
             <input type="text" defaultValue={updateData.address} />
           </InputGroup>
           <InputGroup>
-            <label>Role</label>
+            <label>권한</label>
             <input type="text" defaultValue={updateData.role} />
           </InputGroup>
           <InputGroup>
@@ -63,8 +65,10 @@ const Modal = ({ store, tableData, setTableData, updateData, setUpdateModal }) =
             <span>{age}</span>
           </InputGroup>
           <BtnGroup>
-            <div onClick={handleClickSave}>저장</div>
-            <div onClick={handleClickClose}>닫기</div>
+            <Button gray onClick={handleClickClose}>
+              취소
+            </Button>
+            <Button onClick={handleClickSave}>확인</Button>
           </BtnGroup>
         </Form>
       </Container>
@@ -84,21 +88,41 @@ const Container = styled.div`
   top: 0;
   width: 100vw;
   height: 100vh;
-  background-color: lightblue;
-  opacity: 0.7;
+  background-color: #626262;
 `;
 
 const Form = styled.div`
-  display: flex;
-  flex-direction: column;
+  text-align: center;
+  background-color: #fff;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 65%;
+  border-radius: 10px;
+  padding: 20px 20px 0px 20px;
 `;
 
 const InputGroup = styled.div`
-  width: 300px;
+  text-align: right;
+  padding: 5px 40px;
+  label {
+    font-weight: bold;
+    margin: 20px;
+  }
+  input {
+    padding: 15px 30px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    margin: 5px 20px;
+  }
 `;
 
 const BtnGroup = styled.div`
   display: flex;
-  justify-content: space-around;
-  width: 200px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  Button {
+    margin: 25px 30px;
+  }
 `;
