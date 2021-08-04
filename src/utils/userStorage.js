@@ -33,7 +33,7 @@ export class UserStorage {
   getId() {
     if (this.name !== 'currentUser') throw new Error(errorMessage(this.name));
     const user = JSON.parse(localStorage.getItem('currentUser'));
-    return user.id || null;
+    return (user && user.id) || null;
   }
 
   login(user) {
