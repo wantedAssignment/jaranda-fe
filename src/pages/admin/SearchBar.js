@@ -1,9 +1,12 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 
 const SearchBar = ({ setSearchOption }) => {
+  const history = useHistory();
   const onSubmitHandler = e => {
     e.preventDefault();
     setSearchOption({ [e.target.dropDown.value]: e.target.inputField.value });
+    history.push(`/admin?${e.target.dropDown.value}=${e.target.inputField.value}`);
   };
 
   return (
