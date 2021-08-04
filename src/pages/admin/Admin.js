@@ -60,18 +60,18 @@ const Admin = () => {
     return Passport.redirectHome();
   }
 
-  console.log(columns);
-  console.log(tableData);
-
   return (
     <AdminDiv>
       <SearchBar setSearchOption={setSearchOption} />
       <Table>
         <thead>
           <tr>
-            {columns.map(v => {
-              return <th key={v}>{v}</th>;
-            })}
+            <th>ID</th>
+            <th>Name</th>
+            <th>Password</th>
+            <th>Address</th>
+            <th>Role</th>
+            <th>Age</th>
             <th>&#10006;</th>
           </tr>
         </thead>
@@ -108,79 +108,3 @@ const Admin = () => {
 };
 
 export default Admin;
-
-const FAKEDATE = [
-  {
-    id: 'a',
-    name: 'abab',
-    password: '123',
-    address: 'busan',
-    role: 'admin',
-    age: 13,
-    card: {
-      number: 123,
-      company: 'sinhan',
-    },
-  },
-  {
-    id: 'b',
-    name: 'dede',
-    password: '123',
-    address: 'busan',
-    role: 'admin',
-    age: 15,
-    card: {
-      number: 124,
-      company: 'sinhaan',
-    },
-  },
-  {
-    id: 'c',
-    name: 'ffff',
-    password: '123',
-    address: 'busan',
-    role: 'admin',
-    age: 34,
-    card: {
-      number: 43423,
-      company: 'kb국민',
-    },
-  },
-  {
-    id: 'd',
-    name: 'qqq',
-    password: '123',
-    address: 'busan',
-    role: 'admin',
-    age: 43,
-    card: {
-      number: 121243,
-      company: 'sinhan',
-    },
-  },
-  {
-    id: 'e',
-    name: 'ghhhhh',
-    password: '123',
-    address: 'yongin',
-    role: 'admin',
-    age: 43,
-    card: {
-      number: 15223,
-      company: '하나은행',
-    },
-  },
-];
-
-const FAKEDATE2 = {
-  id: 'a',
-  name: 'abab',
-  password: '123',
-  address: 'busan',
-  role: 'admin',
-  age: 13,
-  card: {
-    number: 123,
-    company: 'sinhan',
-  },
-};
