@@ -14,7 +14,12 @@ const Navigation = () => {
     }
   }, [currentUser]);
 
-  return <NavigationUI isLogin={isLogin} />;
+  const onClick = () => {
+    currentUser.logout();
+    setIsLogin(false);
+  };
+
+  return <NavigationUI isLogin={isLogin} onClick={onClick} />;
 };
 
 export default Navigation;

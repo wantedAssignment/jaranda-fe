@@ -1,7 +1,7 @@
 import { PATHS } from '../../utils/constants/paths';
 import { Link } from 'react-router-dom';
 
-const NavigationUI = ({ isLogin }) => {
+const NavigationUI = ({ isLogin, onClick }) => {
   return (
     <div style={{ paddingLeft: 200, width: 300, display: 'flex', justifyContent: 'space-between' }}>
       <Link to={PATHS.HOME}>
@@ -22,7 +22,7 @@ const NavigationUI = ({ isLogin }) => {
       )}
       {isLogin && (
         <Link to={PATHS.LOG_IN}>
-          <span>로그아웃</span>
+          <span onClick={onClick}>로그아웃</span>
         </Link>
       )}
     </div>
