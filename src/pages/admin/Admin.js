@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import Passport from '../../utils/passport';
 import { UserStorage } from '../../utils/userStorage';
 import Modal from '../../Components/Modal';
@@ -10,7 +9,6 @@ import Pagination from '../../Components/pagination';
 
 const Admin = () => {
   const [tableData, setTableData] = useState([]);
-  const [columns, setColumns] = useState([]);
   const [updateModal, setUpdateModal] = useState(false);
   const [updateData, setUpdateData] = useState(null);
   const [store, setStore] = useState(null);
@@ -18,21 +16,32 @@ const Admin = () => {
   const [isRedirect, setIsRedirect] = useState(false);
 
   useEffect(() => {
+    localStorage.setItem('userData', JSON.stringify(FAKEDATE));
+    localStorage.setItem(
+      'currentUser',
+      JSON.stringify({
+        id: 'lsa3163',
+        name: '이승욱',
+        password: '13131313',
+        address: '수지',
+        role: 'admin',
+        age: 25,
+        card: {
+          number: 123123213213,
+          company: 'hana',
+        },
+      }),
+    );
     const storage = new UserStorage('userData');
     const loginStorage = new UserStorage('currentUser');
     const check = Passport.checkAdmin(loginStorage.getUser());
     const getLocalStorage = storage.getAll();
-    const head = getLocalStorage[0]
-      ? Object.keys(getLocalStorage[0]).filter(v => v !== 'card')
-      : [];
 
     if (check) {
       setIsRedirect(check);
     }
-
     setStore(() => storage);
     setTableData(() => getLocalStorage);
-    setColumns(() => head);
   }, []);
 
   const handleUserDelete = id => e => {
@@ -53,7 +62,7 @@ const Admin = () => {
   const applySearchOptions = tableData => {
     const key = Object.keys(searchOption)[0];
     const value = searchOption[key];
-    return tableData.filter(user => (value ? user[key]?.includes(value) : true));
+    return tableData && tableData.filter(user => (value ? user[key]?.includes(value) : true));
   };
 
   if (isRedirect) {
@@ -76,7 +85,7 @@ const Admin = () => {
           </tr>
         </thead>
         <tbody>
-          {applySearchOptions(tableData).map(v => {
+          {applySearchOptions(tableData)?.map(v => {
             return (
               <tr key={v.id}>
                 <th onDoubleClick={handleUserUpdate(v.id)}>{v.id}</th>
@@ -108,3 +117,66 @@ const Admin = () => {
 };
 
 export default Admin;
+
+const FAKEDATE = [
+  {
+    id: 'a',
+    name: 'abab',
+    password: '123',
+    address: 'busan',
+    role: 'admin',
+    age: 13,
+    card: {
+      number: 123,
+      company: 'sinhan',
+    },
+  },
+  {
+    id: 'b',
+    name: 'dede',
+    password: '123',
+    address: 'busan',
+    role: 'admin',
+    age: 15,
+    card: {
+      number: 124,
+      company: 'sinhaan',
+    },
+  },
+  {
+    id: 'c',
+    name: 'ffff',
+    password: '123',
+    address: 'busan',
+    role: 'admin',
+    age: 34,
+    card: {
+      number: 43423,
+      company: 'kb국민',
+    },
+  },
+  {
+    id: 'd',
+    name: 'qqq',
+    password: '123',
+    address: 'busan',
+    role: 'admin',
+    age: 43,
+    card: {
+      number: 121243,
+      company: 'sinhan',
+    },
+  },
+  {
+    id: 'e',
+    name: 'ghhhhh',
+    password: '123',
+    address: 'yongin',
+    role: 'admin',
+    age: 43,
+    card: {
+      number: 15223,
+      company: '하나은행',
+    },
+  },
+];

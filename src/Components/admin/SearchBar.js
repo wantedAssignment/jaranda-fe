@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import parseQueryParams from '../../utils/parseQueryParams';
@@ -19,7 +20,6 @@ const SearchBar = ({ setSearchOption }) => {
   useEffect(() => {
     const params = parseQueryParams(window.location.search);
     setSearchOption(params);
-    //setInputValue(params);
   }, []);
 
   return (
