@@ -47,6 +47,7 @@ export class UserStorage {
       const item = {
         id: obj[key].id,
         name: obj[key].name,
+        password: obj[key].password,
         address: obj[key].address,
         role: obj[key].role,
         age: obj[key].age,
@@ -63,6 +64,7 @@ export class UserStorage {
     arr.forEach(item => {
       result[item.id] = {
         name: item.name,
+        password: item.password,
         address: item.address,
         role: item.role,
         age: item.age,
