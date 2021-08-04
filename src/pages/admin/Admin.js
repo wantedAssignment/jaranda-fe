@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { UserStorage } from '../../utils/userStorage';
 import Modal from '../../Components/Modal';
 import { Table, AdminDiv, Button, Title } from './Admin.styles.js';
-import SearchBar from './SearchBar';
+import SearchBar from '../../Components/searchBar/SearchBar.js';
 
 const Admin = props => {
   const [tableData, setTableData] = useState([]);
@@ -50,7 +50,7 @@ const Admin = props => {
     <AdminDiv>
       <div className="admin-div">
         <Title>유저 정보 조회</Title>
-        <SearchBar className="admin-serarch" setSearchOption={setSearchOption} />
+        <SearchBar setSearchOption={setSearchOption} />
         <Table>
           <thead>
             <tr>

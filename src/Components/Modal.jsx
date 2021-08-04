@@ -72,10 +72,10 @@ const Modal = ({ store, tableData, setTableData, updateData, setUpdateModal }) =
             <input type="text" defaultValue={updateData.card.company} />
           </InputGroup>
           <BtnGroup>
-            <Button gray onClick={handleClickSave}>
+            <Button gray onClick={handleClickClose}>
               취소
             </Button>
-            <Button onClick={handleClickClose}>저장</Button>
+            <Button onClick={handleClickSave}>확인</Button>
           </BtnGroup>
         </Form>
       </Container>
@@ -95,7 +95,7 @@ const Container = styled.div`
   top: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #c9c9c9;
+  background-color: #626262;
 `;
 
 const Form = styled.div`
@@ -106,6 +106,7 @@ const Form = styled.div`
   transform: translateX(-50%);
   height: 65%;
   border-radius: 10px;
+  padding: 20px 20px 0px 20px;
 `;
 
 const InputGroup = styled.div`
@@ -116,7 +117,7 @@ const InputGroup = styled.div`
     margin: 20px;
   }
   input {
-    padding: 15px 10px;
+    padding: 15px 30px;
     border-radius: 10px;
     border: 1px solid #e0e0e0;
     margin: 5px 20px;
@@ -129,6 +130,6 @@ const BtnGroup = styled.div`
   align-items: center;
   width: 100%;
   Button {
-    margin: 15px 20px;
+    margin: 25px 30px;
   }
 `;

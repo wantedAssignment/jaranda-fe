@@ -12,14 +12,21 @@ export const AdminDiv = styled.div`
 `;
 
 export const Table = styled.table`
-  margin-top: 5%;
+  margin-top: 2%;
   width: 100%;
   font-family: 'Noto Sans KR', sans-serif;
+  border-top: 2px solid #b0b0b0;
+  border-style: unset;
+  background-color: #fff;
+  border-collapse: collapse;
   th {
     padding: 20px 10px;
   }
   thead {
     background-color: #fafafa;
+    tr {
+      border-top: 1px solid #e0e0e0;
+    }
     th {
     }
   }
@@ -27,10 +34,10 @@ export const Table = styled.table`
     tr {
       cursor: pointer;
       :hover {
-        background-color: #e0e0e0;
+        background-color: #f5f5f5;
       }
       th {
-        border-top: 1px solid #e0e0e0;
+        font-weight: unset;
       }
     }
   }
