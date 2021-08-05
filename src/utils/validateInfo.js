@@ -3,12 +3,8 @@ import { UserStorage } from './userStorage';
 const validateInfo = values => {
   // userstorage
   const storage = new UserStorage('userData');
+  const currentUser = new UserStorage('currentUser');
   const userInfo = storage.getAll();
-  // const userInfo = [
-  //   { id: 'marry123', password: '12345678' },
-  //   { id: 'harry123', password: '0987654' },
-  //   { id: 'garry123', password: '101010101' },
-  // ];
 
   const userId = userInfo.map(user => user.id);
   const userPassword = userInfo.map(user => user.password);
@@ -32,6 +28,8 @@ const validateInfo = values => {
   } else if (!userPassword.includes(values.password)) {
     errors.password = '잘못된 비밀번호입니다.';
   }
+
+  currentUser.login({ id: values.id });
 
   return errors;
 };
