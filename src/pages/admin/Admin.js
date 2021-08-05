@@ -17,7 +17,7 @@ const Admin = () => {
   const category = ['아이디', '이름', '주소', '권한', '나이', '카드'];
 
   useEffect(() => {
-    localStorage.setItem('userData', JSON.stringify(FAKEDATE));
+    localStorage.setItem('userData', JSON.stringify(Array(100).fill({ FAKEDATE })));
     localStorage.setItem(
       'currentUser',
       JSON.stringify({
@@ -42,7 +42,7 @@ const Admin = () => {
       setIsRedirect(check);
     }
     setStore(() => storage);
-    setTableData(() => getLocalStorage);
+    setTableData(() => getLocalStorage.slice(0, 10));
   }, []);
 
   const handleUserDelete = id => e => {
@@ -64,6 +64,13 @@ const Admin = () => {
     const key = Object.keys(searchOption)[0];
     const value = searchOption[key];
     return tableData && tableData.filter(user => (value ? user[key]?.includes(value) : true));
+  };
+
+  const handlePageNation = id => {
+    const start = (id - 1) * 10;
+    const table = store.getAll();
+    const pieceData = [...table].splice(start, 10);
+    return setTableData(() => pieceData);
   };
 
   if (isRedirect) {
@@ -110,7 +117,7 @@ const Admin = () => {
           </tbody>
         </Table>
       </div>
-      <Pagination arr={tableData} />
+      <Pagination arr={store?.getAll()} onClick={handlePageNation} />
       {updateModal && (
         <Modal
           store={store}
