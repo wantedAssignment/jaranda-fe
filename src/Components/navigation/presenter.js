@@ -1,31 +1,53 @@
+import { useState } from 'react';
+import { NavWrapper, StyledLink } from './index.style';
 import { PATHS } from '../../utils/constants/paths';
-import { Link } from 'react-router-dom';
 
 const NavigationUI = ({ isLogin, onClick }) => {
+  const [currentPath, setCurrentPath] = useState(PATHS.HOME);
   return (
-    <div style={{ paddingLeft: 200, width: 300, display: 'flex', justifyContent: 'space-between' }}>
-      <Link to={PATHS.HOME}>
-        <span>Home</span>
-      </Link>
-      <Link to={PATHS.ADMIN}>
+    <NavWrapper>
+      <StyledLink
+        to={PATHS.HOME}
+        onClick={() => setCurrentPath(PATHS.HOME)}
+        active={PATHS.HOME === currentPath}
+      >
+        <span>홈</span>
+      </StyledLink>
+      <StyledLink
+        to={PATHS.ADMIN}
+        onClick={() => setCurrentPath(PATHS.ADMIN)}
+        active={PATHS.ADMIN === currentPath}
+      >
         <span>관리자</span>
-      </Link>
+      </StyledLink>
       {!isLogin && (
-        <Link to={PATHS.LOG_IN}>
+        <StyledLink
+          to={PATHS.LOG_IN}
+          onClick={() => setCurrentPath(PATHS.LOG_IN)}
+          active={PATHS.LOG_IN === currentPath}
+        >
           <span>로그인</span>
-        </Link>
+        </StyledLink>
       )}
       {!isLogin && (
-        <Link to={PATHS.SIGN_UP}>
+        <StyledLink
+          to={PATHS.SIGN_UP}
+          onClick={() => setCurrentPath(PATHS.SIGN_UP)}
+          active={PATHS.SIGN_UP === currentPath}
+        >
           <span>회원가입</span>
-        </Link>
+        </StyledLink>
       )}
       {isLogin && (
-        <Link to={PATHS.LOG_IN}>
+        <StyledLink
+          to={PATHS.LOG_IN}
+          onClick={() => setCurrentPath(PATHS.LOG_IN)}
+          active={PATHS.LOG_IN === currentPath}
+        >
           <span onClick={onClick}>로그아웃</span>
-        </Link>
+        </StyledLink>
       )}
-    </div>
+    </NavWrapper>
   );
 };
 
