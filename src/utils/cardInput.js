@@ -18,7 +18,7 @@ const Row = styled.div`
 `;
 
 const Label = styled.label`
-  width: 110px;
+  width: 70px;
   text-align: right;
   margin-right: 20px;
 `;
@@ -32,6 +32,7 @@ const Input = styled.input`
   padding: 10px 20px;
   font-size: 16px;
   font-family: 'Nanum Gothic', sans-serif;
+  margin-right: 3px;
   &::placeholder {
     color: #b4b4b4;
     font-family: 'Nanum Gothic', sans-serif;
@@ -52,10 +53,11 @@ const Button = styled.button`
   font-size: 16px;
   padding: 15px 45px;
   border-radius: 6px;
+  cursor: pointer;
 `;
 
 const ErrorMessage = styled.h3`
-  margin-left: 130px;
+  margin-left: 90px;
   font-size: 12px;
   font-weight: bold;
   color: #e54f4f;
@@ -91,12 +93,32 @@ const CardInput = ({ onSubmitAccountNum, setIsOpenCardNum }) => {
       </Row>
       <Row>
         <Label>카드번호</Label>
-        <Input type="number" defaultValue={accountNum1st} onChange={onChangeAccountNum1st} />
-        <Input type="number" defaultValue={accountNum2nd} onChange={onChangeAccountNum2nd} />
-        <Input type="number" defaultValue={accountNum3rd} onChange={onChangeAccountNum3rd} />
-        <Input type="number" defaultValue={accountNum4th} onChange={onChangeAccountNum4th} />
+        <Input
+          type="text"
+          defaultValue={accountNum1st}
+          onChange={onChangeAccountNum1st}
+          maxlength="4"
+        />
+        <Input
+          type="text"
+          defaultValue={accountNum2nd}
+          onChange={onChangeAccountNum2nd}
+          maxlength="4"
+        />
+        <Input
+          type="text"
+          defaultValue={accountNum3rd}
+          onChange={onChangeAccountNum3rd}
+          maxlength="4"
+        />
+        <Input
+          type="text"
+          defaultValue={accountNum4th}
+          onChange={onChangeAccountNum4th}
+          maxlength="4"
+        />
       </Row>
-      {validError1st && validError2nd && validError3rd && validError4th ? (
+      {bankName.length > 0 && validError1st && validError2nd && validError3rd && validError4th ? (
         <ButtonWrapper>
           <Button type="button" onClick={onSubmitAccount}>
             확인
@@ -104,7 +126,7 @@ const CardInput = ({ onSubmitAccountNum, setIsOpenCardNum }) => {
         </ButtonWrapper>
       ) : (
         <>
-          <ErrorMessage>계좌번호를 확인해주세요.</ErrorMessage>
+          <ErrorMessage>카드사 및 계좌번호를 확인해주세요.</ErrorMessage>
           <ButtonWrapper>
             <Button disabled type="button">
               확인

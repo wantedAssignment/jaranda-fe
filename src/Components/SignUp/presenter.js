@@ -12,6 +12,7 @@ import {
   Row,
   SignUpWrapper,
   Title,
+  AgeLabel,
   Input,
   AdressInputs,
   InputBox,
@@ -111,7 +112,7 @@ const SignUp = ({ onSubmitUserInfo }) => {
       <Title>회원가입</Title>
       <Form onSubmit={onSubmitSignUp}>
         <InputBox>
-          <span>*개인 정보 입력</span>
+          <span>* 개인 정보 입력</span>
           <Row>
             <Label>아이디</Label>
             <Input
@@ -138,16 +139,8 @@ const SignUp = ({ onSubmitUserInfo }) => {
           </Row>
           <Row>
             <Label>나이</Label>
-            <Input
-              placeholder="13"
-              type="range"
-              min="10"
-              max="60"
-              required
-              defaultValue={userAge}
-              onChange={onChangeUserAge}
-            />
-            <span>{userAge}</span>
+            <AgeLabel>{userAge}</AgeLabel>
+            <Input type="range" required defaultValue={userAge} onChange={onChangeUserAge} />
           </Row>
           <Row>
             <Label>주소</Label>
@@ -196,7 +189,7 @@ const SignUp = ({ onSubmitUserInfo }) => {
           )}
         </InputBox>
         <InputBox>
-          <span>*결제 정보 입력</span>
+          <span>* 결제 정보 입력</span>
           <Row>
             <Label>카드사</Label>
             <Input
@@ -219,7 +212,11 @@ const SignUp = ({ onSubmitUserInfo }) => {
             />
           </Row>
         </InputBox>
-        <Modal open={isOpenAddress} info={<DaumPostcode onComplete={onCompletePost} />} />
+        <Modal
+          open={isOpenAddress}
+          close={() => setIsOpenAddress(false)}
+          info={<DaumPostcode onComplete={onCompletePost} />}
+        />
         <Modal
           open={isOpenCardNum}
           close={() => setIsOpenCardNum(false)}

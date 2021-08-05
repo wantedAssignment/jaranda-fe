@@ -28,9 +28,17 @@ export const Label = styled.label`
   margin-right: 20px;
 `;
 
+export const AgeLabel = styled.span`
+  border: 1px solid #aac14f;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: 'Nanum Gothic', sans-serif;
+  margin-right: 10px;
+`;
+
 export const AdressInputs = styled.div`
   display: flex;
-
   > input {
     &:first-child {
       width: 100px;
