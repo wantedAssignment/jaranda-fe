@@ -78,6 +78,7 @@ const SignUp = ({ onSubmitUserInfo }) => {
     }
     setAddress(data.zonecode);
     setAddressDetail(fullAddr);
+    setIsOpenAddress(false);
   };
 
   const onCompleteAccount = (bank, account) => {
@@ -218,15 +219,15 @@ const SignUp = ({ onSubmitUserInfo }) => {
             />
           </Row>
         </InputBox>
-        <Modal open={isOpenAddress} info={<DaumPostcode autoClose onComplete={onCompletePost} />} />
+        <Modal open={isOpenAddress} info={<DaumPostcode onComplete={onCompletePost} />} />
         <Modal
           open={isOpenCardNum}
           close={() => setIsOpenCardNum(false)}
+          isCardModal
           info={
             <CardInput onSubmitAccountNum={onCompleteAccount} setIsOpenCardNum={setIsOpenCardNum} />
           }
         />
-
         <ButtonWrapper>
           {mismatchError || pwdValidationError || idValidationError || isOverLapIdError ? (
             <Button disabled type="submit">

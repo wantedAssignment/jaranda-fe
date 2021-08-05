@@ -5,7 +5,7 @@ export const SignUpWrapper = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 50px;
+  // margin-bottom: 30px;
 `;
 
 export const Title = styled.h1`
@@ -67,7 +67,6 @@ export const Button = styled.button`
   border: none;
   background-color: #aac14f;
   font-family: 'Nanum Gothic', sans-serif;
-
   color: #fff;
   font-size: 16px;
   padding: 15px 45px;
