@@ -70,7 +70,7 @@ const modal = props => {
               {header}
               {close && (
                 <CloseButton className="btn-close-mark default-btn" onClick={close} type="button">
-                  <img src={process.env.PUBLIC_URL + '/img/cancel.png'} />
+                  <img src={process.env.PUBLIC_URL + '/img/cancel.png'} alt="close" />
                 </CloseButton>
               )}
             </Header>
