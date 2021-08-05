@@ -18,6 +18,7 @@ const Pagination = ({ arr, onClick }) => {
 
   const [pages, setPages] = useState([]);
   const [count, setCount] = useState(0);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     if (MAX_LENGTH < 100) {
@@ -75,12 +76,14 @@ const Pagination = ({ arr, onClick }) => {
     if (onClick) {
       onClick(el);
     }
+    setPage(el);
   };
 
   if (!arr || typeof arr !== 'object' || (onClick && typeof onClick !== 'function')) return <></>;
   return (
     <PaginationUI
       pages={pages}
+      page={page}
       onClickLeft={onClickLeft}
       onClickRight={onClickRight}
       runOnClick={runOnClick}
