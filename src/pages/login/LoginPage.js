@@ -4,35 +4,6 @@ import { useHistory } from 'react-router';
 import { UserStorage } from '../../utils/userStorage';
 
 const LoginPage = () => {
-  // localStorage.setItem(
-  //   'userData',
-  //   JSON.stringify([
-  //     {
-  //       id: 'harry123',
-  //       password: 'harry123',
-  //       name: 'abab',
-  //       address: 'busan',
-  //       role: 'admin',
-  //       age: 13,
-  //       card: {
-  //         number: 123,
-  //         company: 'sinhan',
-  //       },
-  //     },
-  //     {
-  //       id: 'marry123',
-  //       password: 'marry123',
-  //       name: 'abab',
-  //       address: 'busan',
-  //       role: 'admin',
-  //       age: 13,
-  //       card: {
-  //         number: 123,
-  //         company: 'sinhan',
-  //       },
-  //     },
-  //   ]),
-  // );
   const [isSubmitted, setIsSubmitted] = useState(false);
   const currentUser = new UserStorage('currentUser');
   const history = useHistory();
@@ -40,6 +11,7 @@ const LoginPage = () => {
   const submitForm = useCallback(() => {
     setIsSubmitted(true);
     history.push({ pathname: '/' });
+    window.location.reload();
   }, [setIsSubmitted, history]);
 
   return (

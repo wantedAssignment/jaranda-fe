@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import validate from '../../utils/validateInfo';
-import useForm from '../../utils/useForm';
+import validate from './utils/validateInfo';
+import useForm from './utils/useForm';
 import { LoginSection, Button } from './LoginPageStyles';
 
 const LoginForm = ({ submitForm }) => {
