@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import validate from './utils/validateInfo';
 import useForm from './utils/useForm';
-import { LoginSection, Button, Input, ErrorDiv } from './LoginPageStyles';
 
+import { LoginSection, Button, Input, ErrorDiv } from './LoginPageStyles';
 const LoginForm = ({ submitForm }) => {
   const { handleChange, handleSubmit, values, errors } = useForm(submitForm, validate);
 
