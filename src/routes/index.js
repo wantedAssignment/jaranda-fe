@@ -3,9 +3,7 @@ import { PATHS } from '../utils/constants/paths';
 import Admin from '../pages/admin/Admin';
 //import SignInPage from '../pages/signIn';
 import LogInPage from '../pages/login/LoginPage';
-
 import SignUpContainer from '../Components/SignUp/container';
-
 import Navigation from '../Components/navigation';
 import Home from '../pages/home';
 
