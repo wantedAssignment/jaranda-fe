@@ -28,6 +28,7 @@ const Modal = ({ store, tableData, setTableData, updateData, setUpdateModal }) =
 
     store.replaceAll(newTableData);
     setTableData(() => newTableData);
+    setUpdateModal(() => false);
   }, []);
 
   const handleClickClose = useCallback(() => {

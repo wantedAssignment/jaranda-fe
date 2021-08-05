@@ -14,7 +14,7 @@ const Admin = () => {
   const [store, setStore] = useState(null);
   const [searchOption, setSearchOption] = useState({ username: '' });
   const [isRedirect, setIsRedirect] = useState(false);
-  const category = ['아이디', '이름', '주소', '나이', '권한', '카드'];
+  const category = ['아이디', '이름', '주소', '권한', '나이', '카드'];
 
   useEffect(() => {
     localStorage.setItem('userData', JSON.stringify(FAKEDATE));
