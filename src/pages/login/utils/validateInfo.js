@@ -30,7 +30,9 @@ const validateInfo = values => {
   }
 
   const result = userInfo.find(user => user.id === values.id);
-  currentUser.login(result);
+
+  if (result !== undefined) currentUser.login(result);
+
   return errors;
 };
 

@@ -1,34 +1,37 @@
 import styled from 'styled-components';
 
-export const LoginSection = styled.section`
+export const Form = styled.form`
   text-align: center;
   margin: 3em auto 0;
-  width: 50%;
+  min-width: 20rem;
+  width: 25%;
   h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 1em;
   }
 
   a {
     text-decoration: none;
-    width: 100%;
+    text-align: right;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
-  form {
-    display: flex;
-    flex-direction: column;
+  p {
+    font-size: 0.8rem;
   }
 
   div {
-    width: 55%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 auto 0.5em;
+    margin: 0.5em auto;
   }
 
   label {
+    min-width: 4rem;
     font-size: 1.1rem;
   }
 `;
@@ -41,18 +44,31 @@ export const Button = styled.button`
   display: block;
   margin: 0 auto;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 1.1rem;
   margin-top: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 export const Input = styled.input`
-  padding: 1em;
-  border: 1px solid #c4c4c4;
+  padding: 0.8em 1em;
+  border: 1px solid #ababab;
   border-radius: 6px;
   text-align: center;
   font-size: 1rem;
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const ErrorDiv = styled.div`
   height: 1.5rem;
+  p {
+    color: #d90429;
+    font-weight: bold;
+  }
 `;
