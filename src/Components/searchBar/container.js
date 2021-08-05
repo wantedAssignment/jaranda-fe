@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import parseQueryParams from '../../utils/parseQueryParams';
+import SearchBarUI from './presenter';
 
 const SearchBar = ({ setSearchOption }) => {
   const [inputValue, setInputValue] = useState('');
@@ -23,22 +24,11 @@ const SearchBar = ({ setSearchOption }) => {
   }, []);
 
   return (
-    <form onSubmit={onSubmitHandler}>
-      <label htmlFor="category">검색창</label>
-      <select name="dropDown" id="category">
-        <option value="name">username</option>
-        <option value="id">id</option>
-        <option value="address">address</option>
-      </select>
-      <input
-        type="text"
-        name="inputField"
-        value={inputValue}
-        onChange={inputHandler}
-        placeholder="검색어를 입력하세요"
-      />
-      <input type="submit" value="검색" />
-    </form>
+    <SearchBarUI
+      onSubmitHandler={onSubmitHandler}
+      inputValue={inputValue}
+      inputHandler={inputHandler}
+    />
   );
 };
 

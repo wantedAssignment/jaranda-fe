@@ -5,7 +5,7 @@ import { UserStorage } from '../../utils/userStorage';
 import Modal from '../../Components/Modal';
 import Pagination from '../../Components/pagination';
 import { Table, AdminDiv, Button, Title } from './Admin.styles.js';
-import SearchBar from '../../Components/searchBar/SearchBar.js';
+import SearchBar from '../../Components/searchBar';
 
 const Admin = () => {
   const [tableData, setTableData] = useState([]);
