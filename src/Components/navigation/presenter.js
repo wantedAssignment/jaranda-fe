@@ -16,7 +16,7 @@ const NavigationUI = ({ isLogin, onClick }) => {
         </Link>
       )}
       {!isLogin && (
-        <Link to={PATHS.SIGN_IN}>
+        <Link to={PATHS.SIGN_UP}>
           <span>회원가입</span>
         </Link>
       )}
