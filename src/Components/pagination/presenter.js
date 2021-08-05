@@ -1,27 +1,49 @@
-const PaginationUI = ({ pages, onClickLeft, onClickRight, runOnClick }) => {
+import styled from 'styled-components';
+
+const PaginationUI = ({ pages, onClickLeft, onClickRight, runOnClick, page }) => {
   return (
-    <div style={{ display: 'flex', width: 500 }}>
-      <div style={{ width: 400, display: 'flex', justifyContent: 'space-between' }}>
-        <img
-          src="./img/arrowLeft.png"
-          alt="arrow"
-          style={{ cursor: 'pointer', width: 10, height: 15 }}
-          onClick={onClickLeft}
-        />
-        {pages.map((el, i) => (
-          <div onClick={() => runOnClick(el)} style={{ cursor: 'pointer' }} key={i}>
-            {el}
-          </div>
-        ))}
-        <img
-          src="./img/arrowRight.png"
-          alt="arrow"
-          style={{ cursor: 'pointer', width: 10, height: 15 }}
-          onClick={onClickRight}
-        />
-      </div>
-    </div>
+    <Container>
+      <Img src="./img/arrowLeft.png" alt="arrow" onClick={onClickLeft} />
+      {pages.map((el, i) => (
+        <PageNumber
+          el={el}
+          page={page}
+          onClick={() => runOnClick(el)}
+          style={{ cursor: 'pointer' }}
+          key={i}
+        >
+          {el}
+        </PageNumber>
+      ))}
+      <Img src="./img/arrowRight.png" alt="arrow" onClick={onClickRight} />
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const PageNumber = styled.div`
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  font-size: 16px;
+  border-radius: 7px;
+  color: ${props => (props.page === props.el ? '#ffffff' : '#8b8b8b')};
+  background-color: ${props => (props.page === props.el ? '#aac14f' : '#ededed')};
+`;
+
+const Img = styled.img`
+  width: 12px;
+  height: 23px;
+  cursor: pointer;
+  margin-right: 15px;
+  margin-left: 5px;
+`;
 
 export default PaginationUI;

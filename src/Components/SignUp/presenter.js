@@ -6,6 +6,19 @@ import Modal from '../../utils/modal';
 import { UserStorage } from '../../utils/userStorage';
 
 import DaumPostcode from 'react-daum-postcode';
+import {
+  Form,
+  Label,
+  Row,
+  SignUpWrapper,
+  Title,
+  Input,
+  AdressInputs,
+  InputBox,
+  Button,
+  ButtonWrapper,
+  ErrorMessage,
+} from './index.style';
 
 const SignUp = ({ onSubmitUserInfo }) => {
   const userData = new UserStorage('userData');
@@ -65,6 +78,7 @@ const SignUp = ({ onSubmitUserInfo }) => {
     }
     setAddress(data.zonecode);
     setAddressDetail(fullAddr);
+    setIsOpenAddress(false);
   };
 
   const onCompleteAccount = (bank, account) => {
@@ -93,42 +107,39 @@ const SignUp = ({ onSubmitUserInfo }) => {
   };
 
   return (
-    <>
-      <header>회원가입</header>
-      <form onSubmit={onSubmitSignUp}>
-        <label>
-          <span>ID</span>
-          <div>
-            <input type="text" required defaultValue={userId} onChange={onChangeUserId} />
-          </div>
-        </label>
-        <label>
-          <span>비밀번호</span>
-          <div>
-            <input type="password" required defaultValue={password} onChange={onChangePassword} />
-          </div>
-        </label>
-        <label>
-          <span>비밀번호 확인</span>
-          <div>
-            <input
-              type="password"
+    <SignUpWrapper>
+      <Title>회원가입</Title>
+      <Form onSubmit={onSubmitSignUp}>
+        <InputBox>
+          <span>*개인 정보 입력</span>
+          <Row>
+            <Label>아이디</Label>
+            <Input
+              placeholder="hello"
+              type="text"
               required
-              defaultValue={passwordCheck}
-              onChange={onChangePasswordCheck}
+              defaultValue={userId}
+              onChange={onChangeUserId}
             />
-          </div>
-        </label>
-        <label>
-          <span>이름</span>
-          <div>
-            <input type="text" required defaultValue={userName} onChange={onChangeUserName} />
-          </div>
-        </label>
-        <label>
-          <span>나이</span>
-          <div>
-            <input
+          </Row>
+          {idValidationError && (
+            <ErrorMessage>id는 6자리 이상 12자리 이하 영어만 가능합니다.</ErrorMessage>
+          )}
+          {isOverLapIdError && <ErrorMessage>중복된 아이디입니다.</ErrorMessage>}
+          <Row>
+            <Label>이름</Label>
+            <Input
+              placeholder="김자란"
+              type="text"
+              required
+              defaultValue={userName}
+              onChange={onChangeUserName}
+            />
+          </Row>
+          <Row>
+            <Label>나이</Label>
+            <Input
+              placeholder="13"
               type="range"
               min="10"
               max="60"
@@ -137,60 +148,97 @@ const SignUp = ({ onSubmitUserInfo }) => {
               onChange={onChangeUserAge}
             />
             <span>{userAge}</span>
-          </div>
-        </label>
-        <label>
-          <span>주소</span>
-          <div>
-            <input type="text" defaultValue={address} onClick={() => setIsOpenAddress(true)} />
-            <input
-              type="text"
-              defaultValue={addressDetail}
-              onClick={() => setIsOpenAddress(true)}
+          </Row>
+          <Row>
+            <Label>주소</Label>
+            <AdressInputs>
+              <Input
+                placeholder="01234"
+                type="text"
+                defaultValue={address}
+                onClick={() => setIsOpenAddress(true)}
+              />
+              <Input
+                type="text"
+                placeholder="판교역로 13길"
+                defaultValue={addressDetail}
+                onClick={() => setIsOpenAddress(true)}
+              />
+            </AdressInputs>
+          </Row>
+        </InputBox>
+        <InputBox>
+          <Row>
+            <Label>비밀번호</Label>
+            <Input
+              placeholder="******"
+              type="password"
+              required
+              defaultValue={password}
+              onChange={onChangePassword}
             />
-          </div>
-        </label>
-        <label>
-          <span>신용카드 정보 입력</span>
-          <div>
-            <input
+          </Row>
+          <Row>
+            <Label>비밀번호 확인</Label>
+            <Input
+              placeholder="******"
+              type="password"
+              required
+              defaultValue={passwordCheck}
+              onChange={onChangePasswordCheck}
+            />
+          </Row>
+          {mismatchError && <ErrorMessage>비밀번호가 일치하지 않습니다.</ErrorMessage>}
+          {pwdValidationError && (
+            <ErrorMessage marginTop={true}>
+              비밀번호는 6자리 이상 12자리 이하이여야 합니다.
+            </ErrorMessage>
+          )}
+        </InputBox>
+        <InputBox>
+          <span>*결제 정보 입력</span>
+          <Row>
+            <Label>카드사</Label>
+            <Input
               type="text"
               defaultValue={bankName}
               onClick={() => setIsOpenCardNum(true)}
               onChange={onChangeBankName}
               required
-              placeholder="은행명"
+              placeholder="삼성"
             />
-            <br />
-            <input
+          </Row>
+          <Row>
+            <Label>신용카드 정보</Label>
+            <Input
               type="text"
               defaultValue={account}
               required
+              placeholder="****************"
               onClick={() => setIsOpenCardNum(true)}
             />
-          </div>
-        </label>
-        <Modal open={isOpenAddress} info={<DaumPostcode autoClose onComplete={onCompletePost} />} />
+          </Row>
+        </InputBox>
+        <Modal open={isOpenAddress} info={<DaumPostcode onComplete={onCompletePost} />} />
         <Modal
           open={isOpenCardNum}
           close={() => setIsOpenCardNum(false)}
+          isCardModal
           info={
             <CardInput onSubmitAccountNum={onCompleteAccount} setIsOpenCardNum={setIsOpenCardNum} />
           }
         />
-        {mismatchError && <h2>비밀번호가 일치하지 않습니다.</h2>}
-        {pwdValidationError && <h2>비밀번호는 6자리 이상 12자리 이하이여야 합니다.</h2>}
-        {idValidationError && <h2>id는 6자리 이상 12자리 이하 영어만 가능합니다.</h2>}
-        {isOverLapIdError && <h2>중복된 아이디입니다.</h2>}
-        {mismatchError || pwdValidationError || idValidationError || isOverLapIdError ? (
-          <button disabled type="submit">
-            회원가입
-          </button>
-        ) : (
-          <button type="submit">회원가입</button>
-        )}
-      </form>
-    </>
+        <ButtonWrapper>
+          {mismatchError || pwdValidationError || idValidationError || isOverLapIdError ? (
+            <Button disabled type="submit">
+              확인
+            </Button>
+          ) : (
+            <Button type="submit">확인</Button>
+          )}
+        </ButtonWrapper>
+      </Form>
+    </SignUpWrapper>
   );
 };
 

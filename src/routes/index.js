@@ -1,13 +1,9 @@
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { PATHS } from '../utils/constants/paths';
 import Admin from '../pages/admin/Admin';
-<<<<<<< HEAD
-import SignInPage from '../pages/signIn';
+//import SignInPage from '../pages/signIn';
 import LogInPage from '../pages/login/LoginPage';
-=======
-import LogInPage from '../pages/logIn';
 import SignUpContainer from '../Components/SignUp/container';
->>>>>>> 45a2226157e6bd4783e2bc42fef7bc29e1facd37
 import Navigation from '../Components/navigation';
 import Home from '../pages/home';
 
