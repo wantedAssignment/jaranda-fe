@@ -1,9 +1,18 @@
-import { useState } from 'react';
-import { NavWrapper, StyledLink } from './index.style';
 import { PATHS } from '../../utils/constants/paths';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { NavWrapper, StyledLink } from './index.style';
 
 const NavigationUI = ({ isLogin, onClick }) => {
   const [currentPath, setCurrentPath] = useState(PATHS.HOME);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname !== currentPath) {
+      setCurrentPath(location.pathname);
+    }
+  }, [location.pathname, currentPath]);
+
   return (
     <NavWrapper>
       <StyledLink
