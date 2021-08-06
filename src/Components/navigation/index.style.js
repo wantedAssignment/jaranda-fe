@@ -7,6 +7,10 @@ export const NavWrapper = styled.nav`
   align-items: center;
   width: 100%;
   height: 70px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 5;
 `;
 
 export const StyledLink = styled(Link)`
