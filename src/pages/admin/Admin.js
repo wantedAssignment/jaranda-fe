@@ -2,10 +2,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Passport from '../../utils/passport';
 import { UserStorage } from '../../utils/userStorage';
-import Modal from '../../Components/Modal';
-import Pagination from '../../Components/pagination';
-import { Table, AdminDiv, Button, Title } from './Admin.styles.js';
-import SearchBar from '../../Components/searchBar';
+import Modal from '../../Components/Modal.js';
+import Pagination from '../../Components/Pagination';
+import { Table, AdminDiv, Button, Title } from './admin.style.js';
+import SearchBar from '../../Components/SearchBar';
 
 const Admin = () => {
   const [tableData, setTableData] = useState([]);
@@ -17,22 +17,6 @@ const Admin = () => {
   const category = ['아이디', '이름', '주소', '권한', '나이', '카드'];
 
   useEffect(() => {
-    localStorage.setItem('userData', JSON.stringify(Array(100).fill({ FAKEDATE })));
-    localStorage.setItem(
-      'currentUser',
-      JSON.stringify({
-        id: 'lsa3163',
-        name: '이승욱',
-        password: '13131313',
-        address: '수지',
-        role: 'admin',
-        age: 25,
-        card: {
-          number: 123123213213,
-          company: 'hana',
-        },
-      }),
-    );
     const storage = new UserStorage('userData');
     const loginStorage = new UserStorage('currentUser');
     const check = Passport.checkAdmin(loginStorage.getUser());
@@ -132,66 +116,3 @@ const Admin = () => {
 };
 
 export default Admin;
-
-const FAKEDATE = [
-  {
-    id: 'a',
-    name: 'abab',
-    password: '123',
-    address: 'busan',
-    role: 'admin',
-    age: 13,
-    card: {
-      number: 123,
-      company: 'sinhan',
-    },
-  },
-  {
-    id: 'b',
-    name: 'dede',
-    password: '123',
-    address: 'busan',
-    role: 'admin',
-    age: 15,
-    card: {
-      number: 124,
-      company: 'sinhaan',
-    },
-  },
-  {
-    id: 'c',
-    name: 'ffff',
-    password: '123',
-    address: 'busan',
-    role: 'admin',
-    age: 34,
-    card: {
-      number: 43423,
-      company: 'kb국민',
-    },
-  },
-  {
-    id: 'd',
-    name: 'qqq',
-    password: '123',
-    address: 'busan',
-    role: 'admin',
-    age: 43,
-    card: {
-      number: 121243,
-      company: 'sinhan',
-    },
-  },
-  {
-    id: 'e',
-    name: 'ghhhhh',
-    password: '123',
-    address: 'yongin',
-    role: 'admin',
-    age: 43,
-    card: {
-      number: 15223,
-      company: '하나은행',
-    },
-  },
-];

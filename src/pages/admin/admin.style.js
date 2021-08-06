@@ -10,10 +10,12 @@ export const AdminDiv = styled.div`
     width: 80%;
     text-align: center;
   }
+  margin-top: 70px;
 `;
 
 export const Table = styled.table`
   margin-top: 2%;
+  margin-bottom: 50px;
   width: 100%;
   font-family: 'Noto Sans KR', sans-serif;
   border-top: 2px solid #b0b0b0;

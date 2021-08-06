@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import useInput from '../../hook/useInput';
 import CardInput from '../../utils/cardInput';
-import Modal from '../../utils/modal';
+import Modal from '../../Components/SignupModal';
 import { UserStorage } from '../../utils/userStorage';
 
 import DaumPostcode from 'react-daum-postcode';

@@ -6,7 +6,6 @@ const useAccount = initialData => {
   const [validError, setValidError] = useState(false);
   const handler = e => {
     if (regex.test(e.target.value)) {
-      console.log(e.target.value);
       setValue(e.target.value);
       setValidError(e.target.value.length === 4);
     }

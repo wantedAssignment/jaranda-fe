@@ -14,7 +14,6 @@ const LoginPage = () => {
 
   return (
     <div>
-      Hello LogInPage!
       <div>{!isSubmitted ? <LoginForm submitForm={submitForm} /> : <p>로그인성공</p>}</div>
     </div>
   );

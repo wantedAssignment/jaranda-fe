@@ -19,5 +19,5 @@ export const StyledLink = styled(Link)`
     display: inline-block;
     margin: 0 30px;
   }
-  color: ${({ active }) => (active ? '#AAC14F' : '#000')};
+  color: ${({ active }) => (active === 'true' ? '#AAC14F' : '#000')};
 `;

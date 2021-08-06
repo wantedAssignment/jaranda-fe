@@ -11,6 +11,7 @@ export const SignUpWrapper = styled.section`
 export const Title = styled.h1`
   font-size: 40px;
   font-weight: bold;
+  margin-top: 40px;
   margin-bottom: 40px;
 `;
 

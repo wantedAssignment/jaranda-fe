@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useRef } from 'react';
 import styled from 'styled-components';
-import { Button, Title } from '../pages/admin/Admin.styles';
+import { Button, Title } from '../pages/admin/admin.style';
 
 const Modal = ({ store, tableData, setTableData, updateData, setUpdateModal }) => {
   const formRef = useRef(null);
@@ -10,7 +10,6 @@ const Modal = ({ store, tableData, setTableData, updateData, setUpdateModal }) =
     const valueArray = Array.from(formRef.current.children, a => a);
     const newTableData = [...tableData].map(v => {
       if (v.id === updateData.id) {
-        console.log(valueArray);
         const newData = {
           id: updateData.id,
           name: valueArray[0].children[1].value,

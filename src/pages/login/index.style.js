@@ -72,3 +72,7 @@ export const ErrorDiv = styled.div`
     font-weight: bold;
   }
 `;
+
+export const adminData = styled.div`
+  margin-bottom: 30px;
+`;

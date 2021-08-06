@@ -1,10 +1,10 @@
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { PATHS } from '../utils/constants/paths';
-import Admin from '../pages/admin/Admin';
+import Admin from '../pages/admin/admin';
 //import SignInPage from '../pages/signIn';
-import LogInPage from '../pages/login/LoginPage';
-import SignUpContainer from '../Components/SignUp/container';
-import Navigation from '../Components/navigation';
+import LogInPage from '../pages/login';
+import SignUpContainer from '../pages/signup';
+import Navigation from '../Components/Navigation';
 import Home from '../pages/home';
 
 const Router = () => {

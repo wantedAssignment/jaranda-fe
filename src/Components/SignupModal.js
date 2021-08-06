@@ -3,10 +3,11 @@ import styled, { css } from 'styled-components';
 
 const ModalBackground = styled.div`
   position: absolute;
+  z-index: 999;
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+  height: 120%;
   background-color: rgba(0, 0, 0, 0.8);
   opacity: ${({ opened }) => (opened ? '1' : '0')};
   visibility: ${({ opened }) => (opened ? 'visible' : 'hidden')};

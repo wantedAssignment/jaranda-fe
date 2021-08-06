@@ -2,13 +2,16 @@ import { Link } from 'react-router-dom';
 import validate from './utils/validateInfo';
 import useForm from './utils/useForm';
 
-import { Form, Button, Input, ErrorDiv } from './LoginPageStyles';
+import { Form, Button, Input, ErrorDiv } from './index.style';
 const LoginForm = ({ submitForm }) => {
   const { handleChange, handleSubmit, values, errors } = useForm(submitForm, validate);
 
   return (
     <Form onSubmit={handleSubmit}>
       <h1>로그인</h1>
+      <div>관리자 계정</div>
+      <div>ID: adminadmin</div>
+      <div style={{ marginBottom: 30 }}>P/W: adminadmin</div>
       <div>
         <label>아이디</label>
         <Input

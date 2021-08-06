@@ -33,6 +33,25 @@ export const Text = styled.p`
   opacity: 0.7;
 `;
 
+export const SuperText = styled.p`
+  font-size: 50px;
+  color: #373737;
+  opacity: 0.5;
+  animation: boxFade 5s 1s infinite linear alternate;
+
+  @keyframes boxFade {
+    0% {
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.7;
+    }
+  }
+`;
+
 export const Button = styled.button`
   border: none;
   background-color: #aac14f;

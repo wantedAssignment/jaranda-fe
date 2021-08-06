@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const SearchBarUI = ({ onSubmitHandler, inputValue, inputHandler }) => {
   return (
     <SearchForm onSubmit={onSubmitHandler}>
-      <label htmlFor="category">검색창</label>
       <select name="dropDown" id="category">
         <option value="name">username</option>
         <option value="id">id</option>
