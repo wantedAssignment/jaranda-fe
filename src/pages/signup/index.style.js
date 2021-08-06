@@ -80,6 +80,9 @@ export const Button = styled.button`
   font-size: 16px;
   padding: 15px 45px;
   border-radius: 6px;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const ButtonWrapper = styled.div`

@@ -8,7 +8,11 @@ const SignUpContainer = ({ history }) => {
     const userData = new UserStorage('userData');
     userData.save(userInfo);
 
+    const currentUser = new UserStorage('currentUser');
+    currentUser.login(userInfo);
+
     history.push('/');
+    window.location.reload();
   };
 
   return <SignUp onSubmitUserInfo={onSubmitUserInfo} />;

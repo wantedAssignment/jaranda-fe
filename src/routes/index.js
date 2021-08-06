@@ -1,7 +1,6 @@
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { PATHS } from '../utils/constants/paths';
 import Admin from '../pages/admin/admin';
-//import SignInPage from '../pages/signIn';
 import LogInPage from '../pages/login';
 import SignUpContainer from '../pages/signup';
 import Navigation from '../Components/Navigation';
