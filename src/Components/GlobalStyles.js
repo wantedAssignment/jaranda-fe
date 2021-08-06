@@ -1,8 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
-const globalStyles = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
     ${reset};
+    html, body {
+        font-family: 'Nanum Gothic', sans-serif;
+    }
     a{
         text-decoration:none;
         color:inherit;
@@ -12,4 +15,4 @@ const globalStyles = createGlobalStyle`
     }
     `;
 
-export default globalStyles;
+export default GlobalStyles;
