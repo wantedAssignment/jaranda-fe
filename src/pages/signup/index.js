@@ -6,9 +6,9 @@ import SignUp from './presenter';
 const SignUpContainer = ({ history }) => {
   const onSubmitUserInfo = userInfo => {
     const userData = new UserStorage('userData');
-    userData.save(userInfo);
-
     const currentUser = new UserStorage('currentUser');
+
+    userData.save(userInfo);
     currentUser.login(userInfo);
 
     history.push('/');
